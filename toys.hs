@@ -1,3 +1,4 @@
+-- Fibonacci number n
 fibo 0 = 0
 fibo 1 = 1
 fibo n = snd (fib_pair n 0 1)
@@ -8,7 +9,8 @@ fibo n = snd (fib_pair n 0 1)
             else
                 fib_pair (k-1) f2 (f1+f2)
 
--- map fibo [0..15]
+-- Fibonacci sequence (infinite)
+fibs = 0:1:(zipWith (+) fibs (tail fibs))
 
 gen f start g n = reverse (xcalc start [])
     where
