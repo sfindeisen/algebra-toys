@@ -1,3 +1,23 @@
+-- import Data.List.Ordered (minus, union, unionAll)
+
+-- prime sequence (infinite)
+primes = 2 : 3 : ([x | x <- [5,7..], (all (\z -> ((x `mod` z) /= 0)) (takeWhile (\y -> y*y<=x) primes))])
+-- primes_sieve = 2 : 3 : minus [5,7..] (unionAll [[p*p, p*p+2*p..] | p <- tail primes])
+
+-- prime divisors in non-decreasing order (with repetitions) (inefficient)
+prime_divisors 0 = []
+prime_divisors 1 = []
+prime_divisors n = reverse $ divi n 2 []
+    where
+        divi n k xs =
+            if (k > n) then
+                xs
+            else
+                if (n `mod` k == 0) then
+                    divi (n `div` k) k (k:xs)
+                else
+                    divi n (1+k) xs
+
 -- Fibonacci number n
 fibo 0 = 0
 fibo 1 = 1
